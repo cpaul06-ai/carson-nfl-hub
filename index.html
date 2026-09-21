@@ -22,7 +22,8 @@
   <style>.btn:disabled{opacity:.35;cursor:not-allowed}.pickControls{flex-wrap:wrap}</style>
   <style>
     .boardHead{display:none}.rankList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:10px}.teamRow{grid-template-columns:52px minmax(155px,1fr) 72px 38px;grid-template-rows:70px auto;min-height:132px;padding:5px 9px 11px;background:#101929;border-color:#223149}.teamRow:hover{background:#162238}.teamRow .rank{grid-column:1;grid-row:1}.teamRow .team{grid-column:2;grid-row:1}.teamRow .move{grid-column:3;grid-row:1;justify-self:end}.teamRow .handle{grid-column:4;grid-row:1}.teamRow .noteWrap{grid-column:2/5;grid-row:2;padding-right:0;width:100%}.teamRow .noteWrap .noteInput{min-width:0}.grid{grid-template-columns:minmax(0,1fr) 300px}
-    @media(max-width:1120px){.rankList{grid-template-columns:1fr}.teamRow{grid-template-columns:52px minmax(155px,1fr) 72px 38px}}
+    @media(max-width:1120px){.grid{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.rankList{grid-template-columns:repeat(2,minmax(0,1fr))}.teamRow{grid-template-columns:52px minmax(155px,1fr) 72px 38px}}
+    @media(max-width:760px){.rankList{grid-template-columns:1fr}}
     @media(max-width:620px){.rankList{display:grid;grid-template-columns:1fr;padding:7px}.teamRow{grid-template-columns:45px minmax(0,1fr) 62px;grid-template-rows:62px auto;min-height:118px}.teamRow .rank{grid-column:1}.teamRow .team{grid-column:2}.teamRow .move{grid-column:3}.teamRow .handle{display:none}.teamRow .noteWrap{grid-column:2/4;grid-row:2}}
   </style>
 </head>
