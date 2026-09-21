@@ -10,7 +10,11 @@
 .ownerPlate b,.ownerPlate small{display:block}
 .ownerPlate b{color:#ded8ff;font-size:13px;letter-spacing:.1em}
 .ownerPlate small{color:#d8deed;font-size:11px;margin-top:2px}
-.memberItem.ownerMember{border-color:#6859cf;background:radial-gradient(circle at 0 0,#3f2b7c55,transparent 42%),linear-gradient(100deg,#111426,#090b14);box-shadow:inset 0 1px #bcb1ff22,0 0 16px #5b40c82b}
+.memberItem.ownerMember{position:relative;overflow:hidden;border-color:#7562ee;background:radial-gradient(circle at 8% 5%,#6442e888 0,transparent 31%),radial-gradient(circle at 88% 85%,#087f9680 0,transparent 34%),#070815;box-shadow:inset 0 1px #d3cbff45,0 0 24px #6044e95c;animation:voidPulse 4s ease-in-out infinite}
+.memberItem.ownerMember:before{content:"";position:absolute;inset:-150%;background:conic-gradient(from 15deg,transparent,#7848ff80,transparent 24%,#10d8d070,transparent 51%,#ae4dff70,transparent 74%);animation:voidSpin 10s linear infinite;pointer-events:none}
+.memberItem.ownerMember>*{position:relative;z-index:1}
+.memberItem.ownerMember .memberOwnerLogo{width:48px;height:48px;border-radius:12px;object-fit:contain;background:#050611;border:1px solid #8070ef;filter:drop-shadow(0 0 9px #587cff);box-shadow:0 0 18px #684bff66}
+.memberItem.ownerMember .memberStats{color:#c8c2ff}
 @keyframes voidSpin{to{transform:rotate(360deg)}}
 @keyframes voidPulse{50%{box-shadow:inset 0 1px #d8d2ff66,0 0 28px #6b4fff88}}
 .accountButton{border:1px solid #35517e;background:linear-gradient(145deg,#17243a,#0c1422);color:#fff;border-radius:11px;padding:10px 13px;font-weight:850;cursor:pointer}

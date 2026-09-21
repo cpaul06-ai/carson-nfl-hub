@@ -4,8 +4,8 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>SportsHub</title>
   <meta name="description" content="Build NFL power rankings, make weekly picks, and compete with friends on SportsHub.">
-  <link rel="stylesheet" href="pickem.css">
-  <link rel="stylesheet" href="account.css">
+  <link rel="stylesheet" href="pickem.css?v=20260921-2">
+  <link rel="stylesheet" href="account.css?v=20260921-2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080d18'/%3E%3Cpath d='M18 16h28v10c0 14-6 20-14 24-8-4-14-10-14-24z' fill='%23295cff'/%3E%3Cpath d='M25 23h14M25 30h14M29 37h6' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
   <style>
@@ -29,7 +29,7 @@
   </style>
 </head>
 <body><div class="shell">
-  <header class="topbar"><div class="brand"><img class="sportsHubLogo" src="assets/sportshub-logo.png" alt="SportsHub"></div><div class="topActions"><div class="season">2026 NFL SEASON</div><button class="accountButton backupButton" id="backupButton" type="button">↓ Data backup</button><button class="accountButton backupButton" id="importButton" type="button">↑ Import backup</button><button class="accountButton" id="accountButton" type="button">Sign in with Google</button></div></header>
+  <header class="topbar"><div class="brand"><img class="sportsHubLogo" src="assets/sportshub-logo.png?v=20260921-2" alt="SportsHub"></div><div class="topActions"><div class="season">2026 NFL SEASON</div><button class="accountButton backupButton" id="backupButton" type="button">↓ Data backup</button><button class="accountButton backupButton" id="importButton" type="button">↑ Import backup</button><button class="accountButton" id="accountButton" type="button">Sign in with Google</button></div></header>
   <section class="hero"><div><div class="eyebrow">NFL power rankings</div><h1>Rank the league.<br>Track every move.</h1><p>Drag teams into order. Every week saves automatically to your account.</p></div><div class="controls"><button class="btn" id="rankPrev">‹ Previous week</button><label class="selectWrap"><span>Ranking week</span><select id="week"></select></label><button class="btn" id="rankNext">Next week ›</button><button class="btn" id="copy">Copy previous</button><button class="btn" id="newWeek">Save week</button><button class="btn primary" id="export">↓ Export image</button></div></section>
   <main class="grid"><section class="board"><div class="boardHead"><div>Rank</div><div>Team</div><div class="noteHead">Notes & tags</div><div>Movement</div><div class="dragHead">Drag</div></div><div class="rankList" id="list"></div></section>
   <aside class="side"><section class="sideCard"><div class="sideTitle">The podium</div><div class="topThree" id="podium"></div></section><section class="sideCard goldCard"><div class="sideTitle" style="color:#ffc75b">★ Team of the week</div><div class="featureControl"><select id="teamWeek" aria-label="Choose team of the week"></select><textarea id="teamWeekNote" maxlength="140" placeholder="Why are they your team of the week?"></textarea></div></section><section class="sideCard"><div class="sideTitle">Week movers</div><div id="movers"><p class="tip">Set Week 2 to see the biggest risers and fallers.</p></div></section><section class="sideCard"><div class="sideTitle">How it works</div><p class="tip">Grab any team card and drag it into place. Switch weeks to revisit an old board; movement is calculated against the prior week.</p></section></aside></main>
@@ -88,4 +88,4 @@ async function exportImage(){
   function wrapText(text,x,y,maxWidth,lineHeight,maxLines){const words=text.split(' ');let line='',lines=0;for(let n=0;n<words.length&&lines<maxLines;n++){const test=line+words[n]+' ';if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line.trim(),x,y+lines*lineHeight);line=words[n]+' ';lines++}else line=test}if(lines<maxLines&&line)ctx.fillText(line.trim(),x,y+lines*lineHeight)}
 }
 function round(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}render();updateRankNav();
-</script><script src="pickem.js"></script><script src="account.js"></script></body></html>
+</script><script src="pickem.js?v=20260921-2"></script><script src="account.js?v=20260921-2"></script></body></html>
