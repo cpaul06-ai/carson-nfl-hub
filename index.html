@@ -116,4 +116,4 @@ async function exportImage(){
   function wrapText(text,x,y,maxWidth,lineHeight,maxLines){const words=text.split(' ');let line='',lines=0;for(let n=0;n<words.length&&lines<maxLines;n++){const test=line+words[n]+' ';if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line.trim(),x,y+lines*lineHeight);line=words[n]+' ';lines++}else line=test}if(lines<maxLines&&line)ctx.fillText(line.trim(),x,y+lines*lineHeight)}
 }
 function round(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}render();updateRankNav();
-</script><script src="wire.js?v=20260921-3"></script><script src="pickem.js?v=20260921-6"></script><script src="account.js?v=20260921-9"></script></body></html>
+</script><script src="wire.js?v=20260921-4"></script><script src="pickem.js?v=20260921-6"></script><script src="account.js?v=20260921-9"></script></body></html>
