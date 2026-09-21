@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>SportsHub</title>
-  <meta name="description" content="Build NFL power rankings, make weekly picks, and compete with friends on SportsHub.">
+  <title>Ledge</title>
+  <meta name="description" content="Build NFL power rankings, make weekly picks, and compete with friends on Ledge.">
   <link rel="stylesheet" href="pickem.css?v=20260921-5">
   <link rel="stylesheet" href="account.css?v=20260921-5">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -29,7 +29,7 @@
   </style>
 </head>
 <body><div class="shell">
-  <header class="topbar"><div class="brand"><img class="sportsHubLogo" src="assets/sportshub-logo.png?v=20260921-5" alt="SportsHub"></div><div class="topActions"><div class="season">2026 NFL SEASON</div><button class="accountButton backupButton" id="backupButton" type="button">↓ Data backup</button><button class="accountButton backupButton" id="importButton" type="button">↑ Import backup</button><button class="accountButton" id="accountButton" type="button">Sign in with Google</button></div></header>
+  <header class="topbar"><div class="brand"><img class="sportsHubLogo" src="assets/ledge-logo.png?v=20260921-6" alt="Ledge"></div><div class="topActions"><div class="season">2026 NFL SEASON</div><button class="accountButton backupButton" id="backupButton" type="button">↓ Data backup</button><button class="accountButton backupButton" id="importButton" type="button">↑ Import backup</button><button class="accountButton" id="accountButton" type="button">Sign in with Google</button></div></header>
   <section class="hero"><div><div class="eyebrow">NFL power rankings</div><h1>Rank the league.<br>Track every move.</h1><p>Drag teams into order. Every week saves automatically to your account.</p></div><div class="controls"><button class="btn" id="rankPrev">‹ Previous week</button><label class="selectWrap"><span>Ranking week</span><select id="week"></select></label><button class="btn" id="rankNext">Next week ›</button><button class="btn" id="copy">Copy previous</button><button class="btn" id="newWeek">Save week</button><button class="btn primary" id="export">↓ Export image</button></div></section>
   <main class="grid"><section class="board"><div class="boardHead"><div>Rank</div><div>Team</div><div class="noteHead">Notes & tags</div><div>Movement</div><div class="dragHead">Drag</div></div><div class="rankList" id="list"></div></section>
   <aside class="side"><section class="sideCard"><div class="sideTitle">The podium</div><div class="topThree" id="podium"></div></section><section class="sideCard goldCard"><div class="sideTitle" style="color:#ffc75b">★ Team of the week</div><div class="featureControl"><select id="teamWeek" aria-label="Choose team of the week"></select><textarea id="teamWeekNote" maxlength="140" placeholder="Why are they your team of the week?"></textarea></div></section><section class="sideCard"><div class="sideTitle">Week movers</div><div id="movers"><p class="tip">Set Week 2 to see the biggest risers and fallers.</p></div></section><section class="sideCard"><div class="sideTitle">How it works</div><p class="tip">Grab any team card and drag it into place. Switch weeks to revisit an old board; movement is calculated against the prior week.</p></section></aside></main>
@@ -53,12 +53,12 @@ async function exportImage(){
   const ctx=canvas.getContext('2d'),a=current(),label=week.options[week.selectedIndex].text.toUpperCase();
   const changes=a.map((c,i)=>({c,d:movement(c,i)||0})),riser=[...changes].sort((x,y)=>y.d-x.d)[0],faller=[...changes].sort((x,y)=>x.d-y.d)[0];
   const featured=store.teamWeek[store.week]||'',featuredNote=(store.teamWeekNotes[store.week]||'').trim(),imgs={},brandImg=new Image;
-  await Promise.all([new Promise(res=>{brandImg.onload=res;brandImg.onerror=res;brandImg.src='assets/sportshub-logo.png'}),...a.map(c=>new Promise(res=>{const im=new Image;im.crossOrigin='anonymous';im.onload=()=>{imgs[c]=im;res()};im.onerror=res;im.src=logo(c)}))]);
+  await Promise.all([new Promise(res=>{brandImg.onload=res;brandImg.onerror=res;brandImg.src='assets/ledge-logo.png'}),...a.map(c=>new Promise(res=>{const im=new Image;im.crossOrigin='anonymous';im.onload=()=>{imgs[c]=im;res()};im.onerror=res;im.src=logo(c)}))]);
   const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#172743');g.addColorStop(.38,'#080d18');g.addColorStop(1,'#03060c');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
   ctx.globalAlpha=.16;ctx.fillStyle='#2d63ff';ctx.beginPath();ctx.moveTo(930,0);ctx.lineTo(1250,0);ctx.lineTo(1030,H);ctx.lineTo(720,H);ctx.closePath();ctx.fill();ctx.globalAlpha=1;
   ctx.drawImage(brandImg,35,42,470,157);ctx.textAlign='left';
   ctx.fillStyle='#7f9cff';ctx.font='900 25px system-ui';ctx.fillText(label,515,88);ctx.fillStyle='#fff';ctx.font='950 49px system-ui';ctx.fillText('POWER RANKINGS',515,145);
-  ctx.fillStyle='#8290a6';ctx.font='700 17px system-ui';ctx.fillText('SPORTSHUB  •  2026 NFL SEASON',518,180);
+  ctx.fillStyle='#8290a6';ctx.font='700 17px system-ui';ctx.fillText('LEDGE  •  2026 NFL SEASON',518,180);
   if(featured){
     const fg=ctx.createLinearGradient(825,44,1170,194);fg.addColorStop(0,'#4b3408');fg.addColorStop(.5,'#c9972c');fg.addColorStop(1,'#5e410c');ctx.fillStyle=fg;round(ctx,825,44,345,150,20);ctx.fill();
     drawAura(imgs[featured],825,44,345,150,'#ffe08a',.34);
@@ -80,12 +80,12 @@ async function exportImage(){
     ctx.textAlign='right';ctx.font='950 17px system-ui';ctx.fillStyle=isGold?'#fff7dc':d>0?'#31d18b':d<0?'#ff5d6c':'#657187';ctx.fillText(d>0?'▲ '+d:d<0?'▼ '+Math.abs(d):'—',x+334,y+31);
     if(isDNP){const sg=ctx.createLinearGradient(x+10,y+68,x+68,y+90);sg.addColorStop(0,'#515a68');sg.addColorStop(.45,'#e3e8ee');sg.addColorStop(.65,'#929daa');sg.addColorStop(1,'#3a424e');ctx.fillStyle=sg;round(ctx,x+11,y+68,57,20,6);ctx.fill();ctx.strokeStyle='#f3f6f9';ctx.lineWidth=1;round(ctx,x+11,y+68,57,20,6);ctx.stroke();ctx.fillStyle='#111722';ctx.font='950 12px system-ui';ctx.textAlign='center';ctx.fillText('DNP',x+39.5,y+83)}
   }
-  ctx.textAlign='left';ctx.fillStyle='#5f6d83';ctx.font='700 16px system-ui';ctx.fillText('SPORTSHUB POWER RANKINGS',50,1172);ctx.textAlign='right';ctx.fillText(new Date().toLocaleDateString(),1550,1172);
-  canvas.toBlob(blob=>{const u=URL.createObjectURL(blob),link=document.createElement('a');link.href=u;link.download='sportshub-power-rankings-week-'+store.week+'.png';link.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast(label+' image downloaded')},'image/png');
+  ctx.textAlign='left';ctx.fillStyle='#5f6d83';ctx.font='700 16px system-ui';ctx.fillText('LEDGE POWER RANKINGS',50,1172);ctx.textAlign='right';ctx.fillText(new Date().toLocaleDateString(),1550,1172);
+  canvas.toBlob(blob=>{const u=URL.createObjectURL(blob),link=document.createElement('a');link.href=u;link.download='ledge-power-rankings-week-'+store.week+'.png';link.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast(label+' image downloaded')},'image/png');
   function drawMover(m,x,y,color,delta){const t=info[m.c],w=featured?153:198;ctx.fillStyle=color;round(ctx,x,y,w,76,13);ctx.globalAlpha=.12;ctx.fill();ctx.globalAlpha=1;drawAura(imgs[m.c],x,y,w,76,null,.22);ctx.fillStyle=color;ctx.font='950 20px system-ui';ctx.fillText(delta,x+12,y+28);ctx.fillStyle='#fff';ctx.font='850 16px system-ui';ctx.fillText(t?t.name:'No change',x+12,y+55)}
   function drawAura(img,x,y,w,h,tint,alpha){if(!img)return;const c=document.createElement('canvas');c.width=w;c.height=h;const q=c.getContext('2d'),size=h*1.7;q.drawImage(img,w-size*.64,-h*.28,size,size);if(tint){q.globalCompositeOperation='source-in';q.fillStyle=tint;q.fillRect(0,0,w,h)}ctx.save();ctx.globalAlpha=alpha;ctx.drawImage(c,x,y);ctx.restore()}
   function drawCPLogo(c,x,y,s){c.save();c.translate(x+s/2,y+s/2);c.rotate(-.055);const bg=c.createLinearGradient(-s/2,-s/2,s/2,s/2);bg.addColorStop(0,'#ff4a35');bg.addColorStop(.27,'#ffb01d');bg.addColorStop(.39,'#326eff');bg.addColorStop(1,'#1237a7');c.fillStyle=bg;round(c,-s/2,-s/2,s,s,28);c.fill();c.globalAlpha=.5;c.fillStyle='#ffead0';for(let i=0;i<5;i++){c.save();c.rotate(-.2);c.fillRect(-s*.62,-s*.38+i*17,s*1.2,5);c.restore()}c.globalAlpha=1;c.shadowColor='#030712';c.shadowBlur=8;c.shadowOffsetX=5;c.shadowOffsetY=6;c.strokeStyle='#0b1630';c.lineWidth=9;c.lineJoin='round';c.font='italic 950 72px "Segoe Print","Brush Script MT",cursive';c.textAlign='center';c.textBaseline='middle';c.strokeText('CP',0,4);c.shadowColor='transparent';c.fillStyle='#fff';c.fillText('CP',0,4);c.globalAlpha=.35;c.strokeStyle='#17244a';c.lineWidth=3;for(let i=0;i<7;i++){c.beginPath();c.moveTo(-45,-34+i*12);c.lineTo(43,-39+i*12);c.stroke()}c.restore()}
   function wrapText(text,x,y,maxWidth,lineHeight,maxLines){const words=text.split(' ');let line='',lines=0;for(let n=0;n<words.length&&lines<maxLines;n++){const test=line+words[n]+' ';if(ctx.measureText(test).width>maxWidth&&line){ctx.fillText(line.trim(),x,y+lines*lineHeight);line=words[n]+' ';lines++}else line=test}if(lines<maxLines&&line)ctx.fillText(line.trim(),x,y+lines*lineHeight)}
 }
 function round(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r)}render();updateRankNav();
-</script><script src="pickem.js?v=20260921-5"></script><script src="account.js?v=20260921-5"></script></body></html>
+</script><script src="pickem.js?v=20260921-5"></script><script src="account.js?v=20260921-6"></script></body></html>
